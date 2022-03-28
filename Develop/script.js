@@ -8,7 +8,6 @@ var selectedChars = []
 
   
 
-
 //Get random lower case letter
 var getLower = function () {
     var randomLower = lowerArray[Math.floor(Math.random() * lowerArray.length)];
@@ -39,14 +38,17 @@ var getRandomSelectedChars = function () {
   return randomChar
 }
 
-var shuffleString = function() {
-  var
+var resetGenerator = function() {
+  selectedChars = []
+  newGeneratedPassword = " ";
 }
+
 
 var generatePassword = function (){
   //Ask User for password criteria 
+  resetGenerator();
   var passLength = parseInt(window.prompt("How many characters would you like your password to be? Please select between 8 and 128"))
-  if (passLength < 8 || passLength >128){
+  if (passLength < 8 || passLength > 128) {
     window.alert("The password length must be between 8 and 128 characters!")
     generatePassword()
   }
@@ -55,11 +57,11 @@ var generatePassword = function (){
     window.alert("Please enter a numerical value!")
     generatePassword()
   }
-
+  
   var confirmLower = window.confirm("Would you like Lower Case Characters in your password?");
   var confirmUpper = window.confirm("Would you like Upper Case Characters in your password");
-  var confirmNum = window.confirm("Would you like numbers in your password?")
-  var confirmSpecial = window.confirm("Would you Special Characters in your password") 
+  var confirmNum = window.confirm("Would you like numbers in your password?");
+  var confirmSpecial = window.confirm("Would you Special Characters in your password");
 
   //Append values to string to ensure the user selection is included atleast once is password
   var userPass = ''
@@ -82,6 +84,13 @@ var generatePassword = function (){
     selectedChars = selectedChars.concat(specialArray)
     userPass += getSpecial()
   }
+  //Generate Password if user doesn't make choice
+  if( selectedChars.length ===0 ){
+    window.alert("You did not make a criteria choice. Generating password with Uppercase characters and special characters")
+    selectedChars = selectedChars.concat(upperArray,specialArray)
+    userPass += getUpper()
+    userPass += getSpecial()
+  }
 
   var selectedPassword = "";
 
@@ -95,11 +104,9 @@ var generatePassword = function (){
  var newGeneratedPassword = selectedPassword + userPass
  console.log(newGeneratedPassword)
 
-  
-}
 
-     
-    
+return newGeneratedPassword
+}
 
 
 // Get references to the #generate element
