@@ -60,11 +60,11 @@ var generatePassword = function (){
   
   var confirmLower = window.confirm("Would you like Lower Case Characters in your password?");
   var confirmUpper = window.confirm("Would you like Upper Case Characters in your password");
-  var confirmNum = window.confirm("Would you like numbers in your password?");
+  var confirmNum = window.confirm("Would you like Numbers in your password?");
   var confirmSpecial = window.confirm("Would you Special Characters in your password");
 
   //Append values to string to ensure the user selection is included atleast once is password
-  var userPass = ''
+  var userPass = []
   if (confirmLower) {
     selectedChars = selectedChars.concat(lowerArray)
     userPass += getLower()
